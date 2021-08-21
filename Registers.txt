@@ -1,0 +1,34 @@
+x16 Registers (16 bit)
+ - 
+x32 Registers (32 bit)
+ - 
+x64 Registers (64 bit)
+ - 
+
+MMX Registers (MMX has no meaning)
+ - Generally for advanced multimedia and communication applications
+ - Registers are aliases for floating points
+ Registers:
+ 
+XMM Registers
+ - Usable in x64 architecture
+ Registers:
+
+FPU(x87) Registers (Floating Point Unit)
+ 80-bit Registers:
+ - ST (0)
+ - ST (1)
+ - ST (2)
+ - ST (3)
+ - ST (4)
+ - ST (5)
+ - ST (6)
+ - ST (7)
+ 48-bit (Pointer) Registers:
+ - FPU Instruction Pointer
+ - FPU Data Pointer
+ 16-bit (Control) Registers:
+ - Control Tag Register
+ - Control Register
+ - Status Register
+ Opcode Register(I think 80 bit)

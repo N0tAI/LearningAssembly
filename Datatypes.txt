@@ -1,0 +1,65 @@
+
+Assembly Datatypes
+ - byte		:	8 bits unsigned			:	2^8 possible values, starting at 0 and ending at 2^8 - 1
+ - sbyte	:	8-bit signed			:	2^8 possible values, starting at -(2^8/2) and ending at (2^8/2 - 1)
+ - word		:	16 bit unsigned			:	2^16 possible values, starting at 0 and ending at 2^16 - 1
+ - sword	:	16 bit signed			:	2^16 possibled values, starting at -(2^16/2) and ending at (2^16/2 - 1)
+ - dword	:	32 bit unsigned			:	2^32 possible values, starting at 0 and ending at 2^32 - 1
+ - sdword	:	32 bit signed			:	2^32 possible values, starting at -(2^32/2) and ending at (2^32/2 - 1)
+ - fword	:	48-bit unsigned			:	2^48 possibled values, starting at 0 and ending at 2^48 - 1 (far pointer)
+ - qword	:	64 bit unsigned			:	2^64 possible values, starting at 0 and ending at 2^64 - 1
+ - tbyte	:	80-bit integer			:	2^80 possible values, starting at 0 and ending at 2^80 - 1
+ - real4	:	32-bit IEEE short real	: 
+ - real8	:	64-bit IEEE long real	: 
+ - real10	:	80-bit IEEE ext-real	: 
+ Legacy declarations
+ - db		:	same as byte
+ - dw		:	same as word
+ - dd		:	same as dword or real4
+ - dq		:	same as qword or real8
+ - dt		:	same as tbyte or real10
+ Initiializing Objects
+ - Bytes
+	- char1 byte 'C'					; Creates a byte of a specific unicode value
+	- num2 byte 0						; unsigned byte declared with min value
+	- num3 byte 255						; unsigned byte declared with max value
+	- num4 sbyte -128					; signed byte declared with min value
+	- num10 sbyte +127					; signed byte declared with max value
+	- name byte ?						; unsigned byte declared uninitialized
+	- list byte 10,20,30,40				; array of unsigned bytes
+	- hello byte "welcome back",0		; declares a string(array of characters with bytes of unicode values) with a null character at the end
+	- hello byte "Welcome back"
+			byte "Ready to get started?"
+			byte "Enter your name",0	; declares a null terminated string on multiple lines
+ - Words
+	- word1 word 65535					; unsigned value
+	- word2 sword -32768				; signed value
+	- word3 word ?						; uninitialized, unsigned
+	- list word 1,2,3,4,5				; array of unsigned words
+ - Double Words
+	- word1 dword 12345678h				; unsigned value
+	- word2 sdword -214742222			; signed value
+	- word3 dword ?						; uninitialized, unsigned
+	- list dword 1,2,3,4,5				; list of unsigned dwords
+
+Integer Anatomy
+ - Contains the sign (positive or negative value)(Optional)
+ - The digits/actual value
+ - the Radix
+  - What format the numbers are represented in
+  - H for Hex (16 digit)
+  - R for Encoded Real (decimal and whole)
+  - q/o for Octal (8 digit)
+  - t and/or d for Decimal (10 digit)
+  - y and/or b for Binary (2 digit)
+
+  Operation Precendence
+   - Ordered highest precedence to lowest precedence
+   1. Paratheses '()'
+   2. Unary plus ('++')
+   2. Unary minus ('--')
+   3. Division ('/')
+   3. Multiplication ('*')
+   3. Modulus Operator ('MOD', '%')
+   4. Addition ('+')
+   4. Subtraction ('-')

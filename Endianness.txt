@@ -1,0 +1,15 @@
+Little Endianness
+ - Values of least importance will be ordered first
+ - in a value of 12345678h the values would be stored at these offsets
+	0: 78
+	1: 56
+	2: 34
+	3: 12
+
+Big Endianness
+ - Values of most importance will be ordered first
+ - In a value of 12345678h the values wouild be stored in these offsets
+	0: 12
+	1: 34
+	2: 56
+	3: 78

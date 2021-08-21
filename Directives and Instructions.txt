@@ -1,0 +1,79 @@
+Directives
+- Assist and control the assembly process
+ - Like a preprocessor?
+- also known as pseudo-ops
+- Not a part of the instruction set
+- Changes the way code is assembled
+
+ Some examples of Directives
+  - .CODE - Indicates the start of a code segment
+  - .DATA - Indiciates the start of a data segment
+  - .STACK - Indicates the start of a stack segment
+  - .END - Indicates the end of a module
+  - .DD - Allocate a double word (4 bytes of storage)
+  - .DWORD - Allocates a double word(4 bytes of storage)
+
+ Data Initizalizer
+  - [name] directive initializer [,initializer]
+   - example: count dword 44324
+   - name
+   - directive initializer
+   - initializer
+Instructions
+ - A statement that is executable by the processor
+ - Translated to machine language byte code by the assembler
+ 
+ Anatomy:
+  - [label:] [mnemonic] [operands] [;comment]
+	- label: Implies the instruction's address in machine code (Optional)
+	 - More convenient to reference in source code
+	 - Can easier reading based on the name of the label
+	 - Translated to the instruction's address once Assembled
+	 - used for jump and call statements
+	- mnemonic: the assembly instruction, required for each line
+	 - Tells the CPU to do a certain operation
+	 - Examples
+	  - mov - Move one value to another location
+	  - add - add two values
+	  - sub - subtract two values
+	  - mul - multiply two values
+	  - jmp - jump to a new location in the code base
+	  - call - call a procedure
+	- operands: Parameters and/or values for the mnemonic to work with (Optional depending on the mnemonic)
+	 - Split by a ,?
+	 - Can be constants
+	 - Can be a constant expression
+	 - Address in memory or register
+	- comment: A comment on the line for human readibility or note taking on the source code (Optional as it is stripped by the Assembler)
+	 - block comments can be called as:
+	   COMMENT ! <your text> !
+	   - This is also multiline:
+		 COMMENT !
+		 My multiline
+		 comment !
+	 - Can use '!' or '&' for block comments
+	 - single line comments can be created by using the ';' character before your comment
+
+Operands
+ Can have operands of varying quantities(0-3)
+ 3 Types of operands
+ - Immediate
+  a. Numeric constants
+ - Register
+  a. Uses a the value contained within a register
+ - Memory
+  a. Uses the value contained within a fragment of memory
+ List of Operands:
+  reg8			-		8-bit general purpose register: AH, AL, BH, BL, CH, CL, DH, DL
+  reg16			-		16-bit general purpose register: AX, BX, CX, DX, SI, DI, SP, BP
+  reg32			-		32-bit general purpose register: EAX, EBX, ECX, EDX, ESI, EDI, ESP, EBP
+  reg			-		Any general purpose register
+  sreg			-		16-bit segment register: CS, DS, SS, ES, FS, GS
+  imm			-		8, 16, OR 32 bit immediate value
+  imm8			-		8-bit immediate byte value
+  imm16			-		16-bit immediate word value
+  imm32			-		32-bit immediate doubleword value
+  reg/mem8		-		8-bit operand, which can be a register or memory byte
+  reg/mem16		-		16-bit operand, can be either a register or memory word
+  reg/mem32		-		32-bit operand, can be either a register or memory doubleword
+  mem			-		An 8, 16, or 32 bit memory operand

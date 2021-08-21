@@ -1,0 +1,20 @@
+Real Address Mode:
+ - Only 1 MB of memory can be addressed
+ - Range of 00000 to FFFFF
+ - Processor can only run one program at a time(no parallel programs)
+  - Can interupt that program to recieve input or wait
+ - Applications can access any memory location
+
+ Address mode
+  - Format: Segment : Offset
+  - 8000:0000
+
+Protected Mode
+ - Processor can only run multiple programs at a time
+ - Each running program is assigned 4 GB of memory
+ - Programs are prevented from accessing the data of the other programs
+
+Virtual 8086 Mode
+ - Processor creates a virtual machine (of 8086 type)
+ - Allocates 1 MB of address space to that virtual machine
+ - Runs in protected mode

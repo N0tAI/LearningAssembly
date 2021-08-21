@@ -1,0 +1,16 @@
+Flag Types
+
+	Control Flags
+	- Controls CPU Operation
+	- Can perform more risky tasks
+	- Can set these to control the mode and operation of the CPI
+
+	Status Flag
+	- Reflects the outcome of arithmetic and logical operations performed by the CPU
+	- Codes:
+		- Overflow(OF), occurs when a signed arithmetic operation is too large to fit into the destination variable/register
+		- Sign(SF), occurs when the result of an arithmetic or logical operation is negative
+		- Zero(ZF), occurs when the result of an arithmetic or logical operation is zero
+		- Carry(CF) occurs when the result of an unsigned arithmetic operation is too large to fit into the destination
+		- Parity(PF), occurs when the least significant byte of a result contains an even number of 1 bits
+		- Auxiliary Carry(AC), occurs when the arithmetic operation causes a carry from bit 3 to bit 4 in an 8-bit operand

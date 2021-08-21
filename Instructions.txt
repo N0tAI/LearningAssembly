@@ -1,0 +1,222 @@
+Move/Copy value Instructions
+MOV:
+ - Copies data from a source destination
+ ex: MOV <destination>, <source>
+ - Cannot implicitly convert larger or smaller numbers to a different size
+
+MOVZX
+ - Move with 0 extend
+ - Copies the value of a source operand into a destination operand and 0 extends the value to 16 or 32 bits(auto implicit upsizing)
+ - Used only with unsigned integers
+ ex:
+  .data
+  byteVal byte 10001111b
+  .code
+  movzx ax, byteVal	; ax = 0000000010001111b
+ - Valid usage is
+  1. reg32, [reg/mem]8
+  2. reg32, [reg/mem]16
+  3. reg16, [reg/mem]8
+
+MOVSX
+ - Move with sign extend
+ - Copies the source operand to the destination operand and transfers the most significant byte to the upsized variables
+ - Used only with signed integers
+ ex:
+  .data
+  byteVal byte 10001111b
+  .code
+  movsx ax,byteVal ; ax = 1111111110001111b
+ - Valid usage is
+  1. reg32, [reg/mem]8
+  2. reg32, [reg/mem]16
+  3. reg16, [reg/mem]8
+
+Direct - Offset Operands
+ .data
+ numArray byte 10h,20h,30h,40h,50h
+ .code
+ mov al, numArray		;	al = 10h (only moves the first value into the register)
+ mov al, [numArray+1]	;	al = 20h (Moves the second entry in the array(or 1 entry off of the beginning))
+ mov al, [numArray+2]	;	al = 30h (same as above by for the third entry)
+
+Address Operands
+ - Effective Address = BaseRegister + IndexRegister * ScaleFactor + Dispacement
+  - Always 32 bits
+ Displacement Form
+  ex: mov eax, [MyValue]
+ BaseRegister Form
+  ex: mov, eax, [ebx]
+ BaseRegister + Displacement Form
+  ex: mov eax, [ebx+12]
+ Displacement + IndexRegister * ScaleFactor Form
+  ex: mov eax, [MyArray+esi*4]
+ BaseRegister + Index Register Form
+  ex: mov eax, [ebx+esi]
+ BaseRegister + IndexRegister + Displacement
+  ex: mov eax, [ebx+esi+12]
+ BaseRegister + IndexRegister * ScaleFactor
+  mov eax, [ebx+esi*4]
+ BaseRegister + IndexRegister * ScaleFactor + Displacement Form
+  ex: mov eax, [ebx+esi*4+20]
+
+Arithmetic Instructions
+Increment
+ - Appears as inc
+ - Takes one operand, either of a register or mem value
+Decrement
+ - Appears as dec
+ - Takes one operand, either of a register or mem value
+ ex:
+  .data
+  myword word 1000h
+  .code
+  inc myword		; myword = 1001h
+  mov bx, myword	; bx = 1001h
+  dec bx			; bx = 1000h
+
+Add
+ - Appears as add
+ - takes two operants destination and source(in that order)
+ ex:
+  .data
+  var1 dword 10000h
+  var2 dword 20000h
+  .code
+  mov eax,var1
+  add eax,var2
+
+ Sub
+ - Appears as sub
+ - takes two operants destination and source(in that order)
+ ex:
+  .data
+  var1 dword 30000h
+  var2 dword 10000h
+  .code
+  mov eax,var1
+  sub eax,var2
+
+Jump
+ - Appears as jmp
+ - Takes a single operand(the destination)
+ex:
+ .code
+ start:
+ jmp start ; Endless loop
+
+Loop
+ - Appears as loop
+ - Automatically uses the ECX register as a count, is decremented as the loop repeats until it reaches zero
+ - Takes a single operand(the destination)
+steps:
+ Subtracts one from ecx
+ compares ecx to 0
+ if it is not zero, it jumps to the location
+ if it is zero, it continues to the sequental instruction
+
+AND
+ - Performs a bitwise AND operation(return value if both sides are of that value) between matching bits and places result in destination
+ - Appears as and
+ - Takes two arguments, destination and source in that order
+ex:
+ AND register, register
+ AND register, memory
+ AND register, constant
+ AND memory, register
+ AND memory, constant
+
+OR
+ - Performs a bitwise OR operation(return value if at least one side is of that value) between matching bits and places result in destination
+ - appears as or
+ - takes two arguments, destination and source in that order
+ex:
+ OR register, register
+ OR register, memory
+ OR register, constant
+ OR memory, register
+ OR memory, constant
+
+TEST
+ - Performs and implied AND operation on each pair of matching bits in two operands
+ - sets the sign to 0 and parity flags based on the value assigned to the destination operand
+ - Appears as test
+ - takes two arguments, destination and source in that order
+ex:
+ test al,00001001b ; test that the bits in location 0 and 3 in the al register are 1
+
+Compare
+ - Used to compare integers
+ - Performs an implied subtraction on destination of sources
+ - appears as cmp
+ - Takes two arguments, destiantion and source in that order
+ex:
+ cmp register, register
+ cmp register, memory
+ cmp register, constant
+ cmp memory, constant
+ cmp memory, register
+
+Conditional Jump
+ - Is a jump instruction that only jumps when a specific status flag is true
+ - appears as Jcond, where cond is a flag condition of at least one flag
+ - prefixed with a compare instruction
+ex:
+ .code
+ cmp eax,0
+ jz level2 ; only jumps if zf = 1
+ ; code
+ level2:
+ ; code/end of module
+ .code
+ cmp eax,0
+ jnz level2 ; jump if zf = 0
+ ; code
+ level2:
+ ; code/end of module
+table:
+	instruction		-	 description	-	 visual
+  JC	-	 Jump if carry flag is set				-	ZF = 1
+  JNC	-	 Jump if carry flag is not set			- ZF = 0
+  JZ	-	 Jump if zero flag is set				-	CF = 1
+  JNZ	-	 Jump if the zero flag is not set		-	CF = 0
+  JO	-	 Jump if the overflow flag is set		-	OF = 1
+  JNO	-	 Jump if the overflow flag is not set	-	OF = 0
+  JS	-	 Jump if the signed flag is set			-	SF = 1
+  jns	-	 Jump if the signed flag is not set		-	SF = 0
+  jp	-	 Jump if the parity flag is set			-	PF = 1
+  jnp	-	 Jump if the parity flag is not set		-	PF = 0
+
+Equality Jum
+ - Is a jump instruction that jumps based on an equality output
+ - appears as Jcond where the cond is an equality comparison of some method
+ex:
+
+table:
+	Instruction - Description
+	JE		-	Jump if equal
+	JNE		-	Jump if not equal
+	JCXZ	-	Jump if register CX = 0
+	JECXZ	-	Jump if register ECX = 0
+Braces
+ - Wraps a value, either immutable or a pointer
+ - creates a pointer to the interior value
+
+DATA OPERATORS
+ - Not part of the assembler instructions
+ - Interpreted and flattened by the assembler at assembly
+Offset
+ - Returns the offset of a data label from the overall program
+PTR
+ - Overrides the operand's default size
+ - Used when doing operations on a variable that is not of the supported size
+TYPE
+ - Returns the size of operand or array element size
+LENGTHOF
+ - Returns the number of elements in an array
+SIZEOF
+ - Returns the number of bytes used by array initializer
+LABEL
+ - Redefines a variable with different size attributes
+ALIGN
+ - Aligns a variable on a boundary(on another size type)
